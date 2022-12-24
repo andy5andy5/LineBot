@@ -22,9 +22,10 @@ ID：@813ntfsr
 ![image](img/IMG_4606.PNG)  
 點選「使用說明」可參考小助手的使用步驟  
 ![image](img/IMG_4607.PNG)  
-點選「查詢機票價格」可開始輸入訂票資料  
+點選「查詢機票價格」可開始輸入訂票資料 
 ![image](img/IMG_4608.PNG)  
 ![image](img/IMG_4609.PNG)  
+在「出發機場目錄」與「到達機場目錄」皆可查詢機場代碼
 ![image](img/IMG_4610.PNG)  
 ![image](img/IMG_4611.PNG)  
 ![image](img/IMG_4612.PNG)  

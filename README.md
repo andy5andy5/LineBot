@@ -19,7 +19,6 @@ ID：@813ntfsr
 並提供訂票網址。
 ### 使用實例
 ![image](img/IMG_4606.PNG)  
-<img src="https://github.com/andy5andy5/LineBot/img/IMG_4606.PNG" width="50">  
 ![image](img/IMG_4607.PNG)  
 ![image](img/IMG_4608.PNG)  
 ![image](img/IMG_4609.PNG)  

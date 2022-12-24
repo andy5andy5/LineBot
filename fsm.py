@@ -268,7 +268,7 @@ class TocMachine(GraphMachine):
         driver = webdriver.Firefox(firefox_profile=firefox_profile)
         time.sleep(1)
         driver.get(ticketurl)
-        time.sleep(7)
+        time.sleep(8)
         content = driver.page_source.encode('utf-8').strip()
         soup = BeautifulSoup(content, "html.parser")
         if people == 1:

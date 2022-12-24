@@ -18,7 +18,15 @@ ID：@813ntfsr
 機器人就會幫助搜尋最優（價格與時間綜合考慮）結果與其價格，  
 並提供訂票網址。
 ### 使用實例
-![image](img/IMG_4606.png)  
+<img src="https://github.com/andy5andy5/LineBot/img/IMG_4606.PNG" width="50%" height="50%">
+![image](img/IMG_4606.PNG)  
+![image](img/IMG_4607.PNG)  
+![image](img/IMG_4608.PNG)  
+![image](img/IMG_4609.PNG)  
+![image](img/IMG_4610.PNG)  
+![image](img/IMG_4611.PNG)  
+![image](img/IMG_4612.PNG)  
+![image](img/IMG_4613.PNG)  
 
 ## FSM圖
 ![image](fsm.png) 

@@ -5,6 +5,8 @@
 
 ## 介紹
 ### line bot 資訊
-![image](https://imgur.com/3NcvvYn)
+![image](img/bot_info-1.png)
+![image](img/bot_info-2.png)
 
 ## FSM圖
+![image](fsm.png)

@@ -27,8 +27,11 @@ ID：@813ntfsr
 ![image](img/IMG_4609.PNG)  
 在「出發機場目錄」與「到達機場目錄」皆可查詢機場代碼
 ![image](img/IMG_4610.PNG)  
+輸入去程時間後可選擇是否需要訂購回程(輸入回程時間)  
 ![image](img/IMG_4611.PNG)  
+輸入人數與選擇艙等  
 ![image](img/IMG_4612.PNG)  
+得到結果  
 ![image](img/IMG_4613.PNG)  
 
 ## FSM圖

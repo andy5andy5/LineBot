@@ -6,6 +6,10 @@
 然而，我們還深陷期末考的水深火熱之中，出國最快也得等到寒假了QQ，  
 為了之後在規畫行程時省去一些麻煩，因此我製作了這個機票價格查詢助手。
 
+## 環境
+Ubuntu 20.04  
+Python 3.8.10  
+
 ## 介紹
 ### line bot 資訊
 名稱：機票價格查詢助手  
@@ -36,6 +40,7 @@ ID：@813ntfsr
 
 ## FSM圖
 ![image](fsm.png) 
+
 ## 參考網站
 1. 機票搜尋：[Skyscanner](https://www.skyscanner.com.tw)  
 2. 機場代碼列表：[飛斯特運通股份有限公司](http://www.exbtr.com/TW/Page.aspx?tn=ca12_1_1_6&Tid=4)

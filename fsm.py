@@ -107,12 +107,19 @@ class TocMachine(GraphMachine):
         return text.lower() == "查詢機場代碼"
 
     def on_enter_codesearch(self, event):
+        global departure
         print("I'm entering codesearch")
         reply_token = event.reply_token
-        send_text_message(
-            reply_token,
-            "機場代碼查詢網頁：\nhttp://www.exbtr.com/TW/Page.aspx?tn=ca12_1_1_6&Tid=4 "
-            + "\n\n請輸入\"輸入出發機場代碼\"\n或輸入\"輸入到達機場代碼\"\n以繼續查詢")
+        if departure == '':
+            send_text_message(
+                reply_token,
+                "機場代碼查詢網頁：\nhttp://www.exbtr.com/TW/Page.aspx?tn=ca12_1_1_6&Tid=4 "
+                + "\n\n請輸入或點選\n\"輸入出發機場代碼\"\n以繼續查詢")
+        else:
+            send_text_message(
+                reply_token,
+                "機場代碼查詢網頁：\nhttp://www.exbtr.com/TW/Page.aspx?tn=ca12_1_1_6&Tid=4 "
+                + "\n\n請輸入或點選\n\"輸入到達機場代碼\"\n以繼續查詢")
 
     #6
     def is_going_to_destination_menu(self, event):
@@ -173,8 +180,11 @@ class TocMachine(GraphMachine):
     def is_going_to_date2_check(self, event):
         global date1
         text = event.message.text
-        date1 = int(text)
-        return True
+        if text.isnumeric() == True:
+            date1 = int(text)
+            return True
+        else:
+            return False
 
     def on_enter_date2_check(self, event):
         print("I'm entering date2_check")
@@ -183,11 +193,11 @@ class TocMachine(GraphMachine):
         button = [
             MessageTemplateAction(
                 label='需要',
-                text='輸入回程日期'
+                text='需要訂購回程'
             ),
             MessageTemplateAction(
                 label='不需要',
-                text='0'
+                text='不需要訂購回程'
             )
         ]
         send_confirm_message(reply_token, text, button)
@@ -195,7 +205,7 @@ class TocMachine(GraphMachine):
     #10
     def is_going_to_date2(self, event):
         text = event.message.text
-        return text.lower() == "輸入回程日期"
+        return text.lower() == "需要訂購回程"
 
     def on_enter_date2(self, event):
         print("I'm entering date2")
@@ -208,8 +218,14 @@ class TocMachine(GraphMachine):
     def is_going_to_people(self, event):
         global date2
         text = event.message.text
-        date2 = int(text)
-        return True
+        if text.lower() == "不需要訂購回程":
+            return text.lower() == "不需要訂購回程"
+        else:
+            if text.isnumeric() == True:
+                date2 = int(text)
+                return True
+            else:
+                return False
 
     def on_enter_people(self, event):
         print("I'm entering people")
@@ -222,8 +238,11 @@ class TocMachine(GraphMachine):
     def is_going_to_planeclass(self, event):
         global people
         text = event.message.text
-        people = int(text)
-        return True
+        if int(text) > 0 and int(text) <= 4:
+            people = int(text)
+            return True
+        else:
+            return False
 
     def on_enter_planeclass(self, event):
         print("I'm entering planeclass")
@@ -247,8 +266,11 @@ class TocMachine(GraphMachine):
     def is_going_to_result(self, event):
         global planeclass
         text = event.message.text
-        planeclass = text.lower()
-        return True
+        if text == "economy" or text == "business":
+            planeclass = text.lower()
+            return True
+        else:
+            return False
 
     def on_enter_result(self, event):
         print("I'm entering result")
@@ -266,7 +288,7 @@ class TocMachine(GraphMachine):
         firefox_profile.set_preference("browser.privatebrowsing.autostart", True)
 
         driver = webdriver.Firefox(firefox_profile=firefox_profile)
-        time.sleep(1)
+        time.sleep(0.5)
         driver.get(ticketurl)
         time.sleep(8)
         content = driver.page_source.encode('utf-8').strip()

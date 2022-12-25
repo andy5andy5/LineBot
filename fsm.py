@@ -290,14 +290,21 @@ class TocMachine(GraphMachine):
         driver = webdriver.Firefox(firefox_profile=firefox_profile)
         time.sleep(0.5)
         driver.get(ticketurl)
-        time.sleep(8)
-        content = driver.page_source.encode('utf-8').strip()
-        soup = BeautifulSoup(content, "html.parser")
-        if people == 1:
-            price = soup.find("span", class_="BpkText_bpk-text__ZWIzZ BpkText_bpk-text--lg__Nzk0N")
-        else:
-            price = soup.find("span", class_="BpkText_bpk-text__ZWIzZ BpkText_bpk-text--lg__Nzk0N")
-            total_price = soup.find("span", class_="BpkText_bpk-text__ZWIzZ BpkText_bpk-text--caption__NDJhY Price_totalPrice__MTJhN")
+        for i in range(10):
+            content = driver.page_source.encode('utf-8').strip()
+            soup = BeautifulSoup(content, "html.parser")
+            if people == 1:
+                found = soup.find("span", class_="BpkText_bpk-text__ZWIzZ BpkText_bpk-text--lg__Nzk0N")
+                if found != None:
+                    price = found
+            else:
+                found1 = soup.find("span", class_="BpkText_bpk-text__ZWIzZ BpkText_bpk-text--lg__Nzk0N")
+                found2 = soup.find("span", class_="BpkText_bpk-text__ZWIzZ BpkText_bpk-text--caption__NDJhY Price_totalPrice__MTJhN")
+                if found1 != None:
+                    price = found1
+                if found2 != None:
+                    total_price = found2
+            time.sleep(1)
         print(ticketurl)
         if people == 1:
             print(price)
@@ -305,17 +312,23 @@ class TocMachine(GraphMachine):
             print(total_price)
 
         reply_token = event.reply_token
-        if people == 1:
-            send_text_message(
-                reply_token,
-                "依照您的搜尋條件：\n所查詢到最佳機票的價格：\n" + "總價 " + price.text + "\n\n訂票網址：\n"
-                + ticketurl + "\n\n輸入\"結束查詢\"回到目錄")
+        if price != "":
+            if people == 1:
+                send_text_message(
+                    reply_token,
+                    "依照您的搜尋條件：\n所查詢到最佳機票的價格：\n" + "總價 " + price.text + "\n(價格可能並非最低價\n推薦點入下面網址查看)"
+                    + "\n\n訂票網址：\n" + ticketurl + "\n\n輸入\"結束查詢\"回到目錄")
+            else:
+                send_text_message(
+                    reply_token,
+                    "依照您的搜尋條件：\n所查詢到最佳機票的價格：\n" + "單價 " + price.text + "\n" + total_price.text + "\n(價格可能並非最低價\n推薦點入下面網址查看)"
+                    + "\n\n訂票網址：\n" + ticketurl + "\n\n輸入\"結束查詢\"回到目錄")
         else:
             send_text_message(
                 reply_token,
-                "依照您的搜尋條件：\n所查詢到最佳機票的價格：\n" + "單價 " + price.text + "\n" + total_price.text + "\n\n訂票網址：\n"
+                "助手來不及抓到價格\n不好意思TAT\n\n以下為訂票網址\n請直接點入查看：\n"
                 + ticketurl + "\n\n輸入\"結束查詢\"回到目錄")
-        
+
         time.sleep(2)
         driver.close()
         driver.quit()

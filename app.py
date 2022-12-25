@@ -177,7 +177,28 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+            if machine.state == "user":
+                send_text_message(event.reply_token, "請輸入\"開始\"進入主目錄")
+            elif machine.state == "main_menu":
+                send_text_message(event.reply_token, "請點選主目錄選項")
+            elif machine.state == "departure_menu":
+                send_text_message(event.reply_token, "請點選出發機場目錄選項")
+            elif machine.state == "destination_menu":
+                send_text_message(event.reply_token, "請點選到達機場目錄選項")
+            elif machine.state == "codesearch":
+                send_text_message(event.reply_token, "請點選或輸入\n\"輸入出發/到達機場代碼\"")
+            elif machine.state == "date1" or machine.state == "date2":
+                send_text_message(event.reply_token, "請輸入正確日期")
+            elif machine.state == "date2_check":
+                send_text_message(event.reply_token, "請確認是否需要訂購回程")
+            elif machine.state == "people":
+                send_text_message(event.reply_token, "請確認人數為1~4人")
+            elif machine.state == "planeclass":
+                send_text_message(event.reply_token, "請點選艙等選項")
+            elif machine.state == "result":
+                send_text_message(event.reply_token, "請輸入\"結束查詢\"回到主目錄")
+            else:
+                send_text_message(event.reply_token, "請確認輸入值")
 
     return "OK"
 
